@@ -19,7 +19,7 @@ export const PasswordForm = () => {
     return (
         <Form>
             <StyledBackIcon src={icon} alt='back-icon' />
-            {window.length > 400 && <Header>Проверка пароля</Header>}
+            <Header>Проверка пароля</Header>
             <h1>Пароль</h1>
             <Wish>Придумайте новый пароль</Wish>
             <Input
@@ -71,14 +71,12 @@ export const PasswordForm = () => {
 const StyledBackIcon = styled.img`
     display: none;
     width: 300px;
-    @media (max-width: 400px) {
-        width: 24px;
-        height: 24px;
-        display: inline-block;
-        position: absolute;
-        top: 50px;
-        left: 10px;
-    }
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: absolute;
+    top: 50px;
+    left: 3%;
 `
 
 const Error = styled.label`
