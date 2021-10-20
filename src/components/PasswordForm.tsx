@@ -110,7 +110,7 @@ const Input = styled.input`
     padding: 13px;
 `
 const Form = styled.div`
-    padding: 50px;
+    padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
