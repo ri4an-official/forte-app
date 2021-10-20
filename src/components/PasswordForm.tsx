@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useInput } from '../models/hooks/useInput'
 import { WarningIcon } from './icons/WarningIcon'
+import icon from './../assets/back-icon.png'
 export const PasswordForm = () => {
     const password = useInput()
     const newPassword = useInput()
@@ -17,7 +18,8 @@ export const PasswordForm = () => {
     }, [password.value, password.error, newPassword.value, newPassword.error])
     return (
         <Form>
-            <Header>Проверка пароля</Header>
+            <StyledBackIcon src={icon} alt='back-icon' />
+            {window.length > 400 && <Header>Проверка пароля</Header>}
             <h1>Пароль</h1>
             <Wish>Придумайте новый пароль</Wish>
             <Input
@@ -66,6 +68,19 @@ export const PasswordForm = () => {
         </Form>
     )
 }
+const StyledBackIcon = styled.img`
+    display: none;
+    width: 300px;
+    @media (max-width: 400px) {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        position: absolute;
+        top: 50px;
+        left: 10px;
+    }
+`
+
 const Error = styled.label`
     font-size: 14px;
     color: red;
@@ -85,14 +100,14 @@ const Wish = styled.div`
     font-size: 17px;
 `
 const Conditions = styled.div`
-    width: 55%;
+    width: 110%;
 `
 const Warning = styled.div`
     display: flex;
     border: 1px solid darkgray;
     border-radius: 11px;
     color: darkgray;
-    width: 55%;
+    width: 100%;
     font-size: 13px;
 `
 const Input = styled.input`
@@ -104,19 +119,19 @@ const Input = styled.input`
     }
     font-weight: bold;
     font-size: 14px;
-    width: 50%;
+    width: 100%;
     border: 1px solid darkgray;
     border-radius: 11px;
     padding: 13px;
 `
 const Form = styled.div`
-    padding: 10px;
+    padding: 30px;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 600px;
+    width: 400px;
     * {
         margin: 10px;
     }
@@ -136,7 +151,7 @@ const Button = styled.button`
     }
     cursor: pointer;
     margin-top: 20px;
-    width: 30%;
+    width: 50%;
     height: 50px;
     padding: 5px;
     font-size: 15px;
