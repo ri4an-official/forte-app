@@ -1,6 +1,6 @@
 # Passwrod Form
 
-![start-screen](./src/assets/start-screen.png)
-![not-valid](./src/assets/not-valid.png)
-![complete](./src/assets/complete.png)
+![start-screen](./src/assets/screens/start-screen.png)
+![not-valid](./src/assets/screens/not-valid.png)
+![complete](./src/assets/screens/complete.png)
     
