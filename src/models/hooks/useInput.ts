@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const useInput = (initValue = 'password123#My') => {
+export const useInput = (initValue = '') => {
     const [value, setValue] = useState(initValue)
     const [error, setError] = useState('')
     const [firstInp, setFirstInp] = useState(false)
