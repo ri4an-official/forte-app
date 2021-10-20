@@ -21,14 +21,14 @@ export const PasswordForm = () => {
             <h1>Пароль</h1>
             <Wish>Придумайте новый пароль</Wish>
             <Input
-                defaultValue=' '
+                type='password'
                 className={password.error && 'error'}
                 {...password}
                 placeholder='Придумайте пароль*'
             />
             {password.error && <Error>{password.error}</Error>}
             <Input
-                defaultValue=' '
+                type='password'
                 className={newPassword.error && 'error'}
                 {...newPassword}
                 placeholder='Повторите пароль*'
