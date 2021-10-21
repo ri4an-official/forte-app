@@ -1,13 +1,5 @@
 import styled from 'styled-components'
-import { PasswordForm } from './components/PasswordForm'
+import { MainPage } from './main-page/components/MainPage'
+// import { PasswordForm } from './password-form/components/PasswordForm'
 
-export const App = () => (
-    <StyledApp>
-        <PasswordForm />
-    </StyledApp>
-)
-const StyledApp = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+export const App = () => <MainPage />
