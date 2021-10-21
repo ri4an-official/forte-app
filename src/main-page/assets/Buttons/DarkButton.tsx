@@ -1,3 +1,3 @@
-export const DarkButton = () => {
-    return <div></div>
+export const DarkButton = ({ children }: { children: string }) => {
+    return <button>children</button>
 }
