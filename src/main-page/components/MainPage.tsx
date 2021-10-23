@@ -17,6 +17,6 @@ export const MainPage = () => {
     )
 }
 const StyledMainPage = styled.div`
-    //! Измени шрифт на Rubik
+    /* // FIXME - Измени шрифт на Rubik */
     font-family: Arial, Helvetica, sans-serif;
 `
