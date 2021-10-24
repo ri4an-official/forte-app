@@ -7,5 +7,5 @@ export const App = () => (
         <MainPage />
     </StyledApp>
 )
-
+// FIXME - add material-ui elem
 const StyledApp = styled.div``
