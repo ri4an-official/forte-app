@@ -1,5 +1,6 @@
 export const BgImage = () => (
     <svg
+        className='bg-image'
         width='454'
         height='397'
         viewBox='0 0 454 397'

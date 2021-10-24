@@ -1,5 +1,6 @@
 export const NextArrow = () => (
     <svg
+        className='next'
         width='36'
         height='36'
         viewBox='0 0 36 36'
