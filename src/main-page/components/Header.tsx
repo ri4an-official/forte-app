@@ -13,6 +13,7 @@ export const Header = () => (
             <SelectArrow />
         </ToRight>
         <SideTubs>
+            {/* // FIXME - fix icon geolocation */}
             <Location />
             Усть-Каменогорск
         </SideTubs>
