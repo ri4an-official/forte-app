@@ -5,18 +5,16 @@ import { Cards } from './Cards/Cards'
 import { Header } from './Header'
 import { Tubs } from './Tubs'
 
-export const MainPage = () => {
-    return (
-        <StyledMainPage>
-            <Header />
-            <Tubs />
-            <Banner />
-            <Cards />
-            <Calculator />
-        </StyledMainPage>
-    )
-}
+export const MainPage = () => (
+    <StyledMainPage>
+        <Header />
+        <Tubs />
+        <Banner />
+        <Cards />
+        <Calculator />
+    </StyledMainPage>
+)
 const StyledMainPage = styled.div`
-    /* // FIXME - Измени шрифт на Rubik */
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Rubik';
+    font-style: normal;
 `
