@@ -3,12 +3,14 @@ import { BackArrow } from '../assets/icons/banner/BackArrow'
 import { BgImage } from '../assets/icons/banner/BgImage'
 import { NextArrow } from '../assets/icons/banner/NextArrow'
 import { PaginationItem } from '../assets/icons/banner/PaginationItem'
-
-// FIXME - change first item and bg-color
+import { SelectedItem } from '../assets/icons/banner/SelectedItem'
+import img from './../assets/icons/banner/bg-image.jpeg'
 export const Banner = () => (
     <StyledBanner>
         <WithArrow>
-            <BackArrow />
+            <StyledArrow>
+                <BackArrow />
+            </StyledArrow>
             <Block>
                 <Name>
                     <span>Forte</span> - Bank
@@ -17,7 +19,7 @@ export const Banner = () => (
                 <p>Покупки без процентов</p>
                 <StyledButton>Подробнее</StyledButton>
                 <Pagination>
-                    <PaginationItem></PaginationItem>
+                    <SelectedItem></SelectedItem>
                     <PaginationItem></PaginationItem>
                     <PaginationItem></PaginationItem>
                     <PaginationItem></PaginationItem>
@@ -30,7 +32,15 @@ export const Banner = () => (
         </WithArrow>
     </StyledBanner>
 )
+const StyledArrow = styled.div`
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+`
 const WithArrow = styled.div`
+    cursor: pointer;
     height: 100%;
     display: flex;
     flex-grow: 1;
@@ -39,9 +49,6 @@ const WithArrow = styled.div`
 const Pagination = styled.div`
     * {
         margin: 4px;
-    }
-    &:first-child {
-        color: #1e2a41;
     }
 `
 const StyledButton = styled.button`
@@ -60,9 +67,9 @@ const StyledButton = styled.button`
 const StyledBanner = styled.div`
     display: flex;
     align-items: center;
-    background-color: blue;
+    background-image: url(${img});
     color: white;
-    width: 100%;
+    min-width: 1200px;
     height: 400px;
 `
 const Name = styled.div`
@@ -75,7 +82,7 @@ const Block = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin-left: 200px;
+    margin-left: 40px;
     * {
         margin-top: 30px;
         flex-grow: 1;
