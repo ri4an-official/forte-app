@@ -23,10 +23,19 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Password Form</title>
+  <script>
+    for (let e of document.querySelectorAll('input[type="range"]')) {
+      e.style.setProperty('--value', e.value);
+      e.style.setProperty('--min', e.min == '' ? '0' : e.min);
+      e.style.setProperty('--max', e.max == '' ? '100' : e.max);
+      e.addEventListener('input', () => e.style.setProperty('--value', e.value));
+    }
+  </script>
   <style jsx global>
     body {
       margin: 0px;
       padding: 0px;
+      overflow-x: hidden;
     }
   </style>
 </head>
