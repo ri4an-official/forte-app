@@ -1,12 +1,20 @@
-import { useState } from 'react'
+import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-
+import { useInput } from '../../password-form/hooks/useInput'
+import img from './../assets/icons/calculator/slider.svg'
 export const Calculator = () => {
-    // TODO - add functional
-    const [sum, setSum] = useState(100000)
-    const [result, setResult] = useState(2343042)
-    const [term, setTerm] = useState(12)
-    const [procent, setProcent] = useState(10.56)
+    const sum = useInput('5590000')
+    const term = useInput('36')
+    const [result, setResult] = useState(0)
+    const [procent, setProcent] = useState(16.66)
+    useEffect(() => {
+        setResult(+sum.value / +term.value)
+        // NOTE - maybe fix
+        setProcent((+sum.value / +term.value / +term.value) * 12000)
+    }, [sum, term])
+    const toTerm = (months: number) => (months <= 12 ? months : months / 12)
+
     return (
         <CalcBlock>
             <h1>Кредит на любые цели</h1>
@@ -16,14 +24,18 @@ export const Calculator = () => {
                     <Block>
                         <p>Сколько вам нужно?</p>
                         <Line>
-                            <input
+                            <InputRange
+                                id='range1'
+                                {...sum}
                                 min={10000}
                                 max={10000000}
-                                defaultValue={(10000000 + 10000) / 2}
-                                step={10000}
+                                defaultValue={sum.value}
+                                step={90000}
                                 type='range'
                             />
-                            <Result>{sum.toLocaleString()} &#8376;</Result>
+                            <Result>
+                                {Number(sum.value).toLocaleString()} &#8376;
+                            </Result>
                         </Line>
                         <Range>
                             <Min>10 000 &#8376;</Min>
@@ -33,14 +45,19 @@ export const Calculator = () => {
                     <Block>
                         <p>Срок кредитования</p>
                         <Line>
-                            <input
-                                defaultValue={(612 + 6) / 2}
+                            <InputRange
+                                id='range2'
+                                {...term}
+                                defaultValue={sum.value}
                                 min={6}
-                                max={612}
+                                max={60}
                                 step={6}
                                 type='range'
                             />
-                            <Result>{term} месяцев</Result>
+                            <Result>
+                                {toTerm(+term.value)}{' '}
+                                {+term.value <= 12 ? 'месяцев' : 'лет'}
+                            </Result>
                         </Line>
                         <Range>
                             <Min>6 месяцев</Min>
@@ -48,21 +65,23 @@ export const Calculator = () => {
                         </Range>
                     </Block>
                     <Clarify>
-                        <input id='cb' type='checkbox' name='' />
-                        <label htmlFor='cb'>
-                            Я получаю зарплату по карте форте банк
-                        </label>
-                        <p className='clarify'>
-                            Для точного расчета необходимо оставить заявку
-                        </p>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Checkbox defaultChecked />}
+                                label='Я получаю зарплату по карте форте банк'
+                            />
+                            <p className='clarify'>
+                                Для точного расчета необходимо оставить заявку
+                            </p>
+                        </FormGroup>
                     </Clarify>
                 </Calc>
                 <VerticalLine />
                 <Amount>
                     <p>Ежемесячный платеж</p>
-                    <Sum>{result.toLocaleString()} &#8376;</Sum>
+                    <Sum>{Number(result.toFixed(0)).toLocaleString()} &#8376;</Sum>
                     <p>Ставка вознаграждения</p>
-                    <Procent>{procent}%</Procent>
+                    <Procent>{procent.toFixed(2)}%</Procent>
                     <StyledButton>Оформить кредит</StyledButton>
                 </Amount>
             </StyledCalc>
@@ -71,7 +90,7 @@ export const Calculator = () => {
 }
 const Clarify = styled.div`
     * {
-        margin: 10px;
+        margin: 2px;
     }
     & > label {
         color: #303030;
@@ -80,7 +99,7 @@ const Clarify = styled.div`
         font-size: 14px;
         color: #737373;
     }
-    input[type='checkbox']:checked,
+    /* input[type='checkbox']:checked,
     input[type='checkbox']:not(:checked) {
         position: absolute;
         left: -9999px;
@@ -92,10 +111,49 @@ const Clarify = styled.div`
         padding-left: 28px;
         line-height: 20px;
         cursor: pointer;
+    } */
+`
+const InputRange = styled.input`
+    width: 75%;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    height: 4px;
+    background-color: white;
+    --range: calc(var(--max) - var(--min));
+    --ratio: calc((var(--value) - var(--min)) / var(--range));
+    --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+
+    &::-webkit-slider-thumb {
+        appearance: none;
+        border-radius: 20px;
+        width: 24px;
+        height: 24px;
+        // FIXME - fix slider
+        background: url(${img}) no-repeat center white;
+        box-shadow: 0px 2px 3px 1px darkgray;
+        cursor: ew-resize;
+    }
+    &::-webkit-slider-runnable-track {
+        background: linear-gradient(#1e2a41, #1e2a41) 0 / var(--sx) 100% no-repeat,
+            white;
     }
 `
 const Range = styled.div`
-    width: 79%;
+    width: 75%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+const Min = styled.div`
+    font-size: 12px;
+    color: #737373;
+`
+const Max = styled.div`
+    font-size: 12px;
+    color: #737373;
 `
 const StyledButton = styled.button`
     width: 186px;
@@ -129,27 +187,10 @@ const Amount = styled.div`
         color: #303030;
     }
 `
+
 const Block = styled.div`
     width: 95%;
     height: 35%;
-    input[type='range'] {
-        width: 79%;
-        color: #1e2a41;
-        appearance: none;
-        outline: none;
-        background: white;
-        cursor: pointer;
-        border-radius: 20px;
-        height: 4px;
-        &::-webkit-slider-thumb {
-            appearance: none;
-            border-radius: 20px;
-            width: 24px;
-            height: 24px;
-            // FIXME - fix slider
-            background: #9d2550; //white;
-        }
-    }
 `
 const Procent = styled.div`
     font-size: 24px;
@@ -159,16 +200,6 @@ const Sum = styled.div`
     font-size: 30px;
     font-weight: 500;
     color: #9d2550;
-`
-const Min = styled.div`
-    font-size: 12px;
-    color: #737373;
-    text-align: left;
-`
-const Max = styled.div`
-    font-size: 12px;
-    color: #737373;
-    text-align: right;
 `
 const Result = styled.div`
     margin-left: 10px;
