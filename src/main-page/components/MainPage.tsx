@@ -17,4 +17,5 @@ export const MainPage = () => (
 const StyledMainPage = styled.div`
     font-family: 'Rubik';
     font-style: normal;
+    color: #303030;
 `
