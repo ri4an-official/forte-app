@@ -1,4 +1,3 @@
-import { Checkbox, FormControlLabel, FormGroup } from '@material-ui/core'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useInput } from '../../password-form/hooks/useInput'
@@ -10,8 +9,7 @@ export const Calculator = () => {
     const [procent, setProcent] = useState(16.66)
     useEffect(() => {
         setResult(+sum.value / +term.value)
-        // NOTE - maybe fix
-        setProcent((+sum.value / +term.value / +term.value) * 12000)
+        setProcent((+sum.value / +term.value) * 0.0001 * 0.3)
     }, [sum, term])
     const toTerm = (months: number) => (months <= 12 ? months : months / 12)
 
@@ -65,15 +63,15 @@ export const Calculator = () => {
                         </Range>
                     </Block>
                     <Clarify>
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<Checkbox defaultChecked />}
-                                label='Я получаю зарплату по карте форте банк'
-                            />
-                            <p className='clarify'>
-                                Для точного расчета необходимо оставить заявку
-                            </p>
-                        </FormGroup>
+                        <div className='toggle'>
+                            <input type='checkbox' id='toggle1' />
+                            <div className='toggle-handle'></div>
+                            <label htmlFor='toggle1'></label>
+                            <span>Я получаю зарплату по карте форте банк</span>
+                        </div>
+                        <p className='clarify'>
+                            Для точного расчета необходимо оставить заявку
+                        </p>
                     </Clarify>
                 </Calc>
                 <VerticalLine />
@@ -99,19 +97,66 @@ const Clarify = styled.div`
         font-size: 14px;
         color: #737373;
     }
-    /* input[type='checkbox']:checked,
-    input[type='checkbox']:not(:checked) {
-        position: absolute;
-        left: -9999px;
-    }
-    input[type='checkbox']:checked + label,
-    input[type='checkbox']:not(:checked) + label {
-        display: inline-block;
+    .toggle {
+        margin: 5px;
         position: relative;
-        padding-left: 28px;
-        line-height: 20px;
-        cursor: pointer;
-    } */
+    }
+    .toggle input[type='checkbox'] {
+        opacity: 0;
+        position: absolute;
+    }
+    .toggle label {
+        padding: 0.5px;
+        background-color: rgb(238, 238, 238);
+        border: 1px solid #999999;
+        border-radius: 20px 20px 20px 20px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1) inset;
+        height: 20px;
+        position: relative;
+        width: 34px;
+        display: block;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    .toggle input:checked ~ label {
+        background-color: #9d2550;
+        background-image: linear-gradient(to bottom, #9d2550 0px, #9d2550 100%);
+        border: 1px solid darkgray;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.25) inset;
+    }
+    .toggle .toggle-handle {
+        background-color: #999999;
+        background-image: linear-gradient(to bottom, #999999 0px, #999999 100%);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 100px 100px 100px 100px;
+        height: 16px;
+        position: absolute;
+        -webkit-transition: -webkit-transform 0.1s ease-in-out 0s,
+            border 0.1s ease-in-out 0s;
+        transition: transform 0.1s ease-in-out 0s, border 0.1s ease-in-out 0s;
+        width: 16px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .toggle input:checked + .toggle-handle {
+        border-color: #9d2550;
+        -webkit-transform: translate3d(18px, 0px, 0px);
+        transform: translate3d(18px, 0px, 0px);
+    }
+    .toggle label:after {
+        color: #777777;
+        font-weight: bold;
+        line-height: 28px;
+        position: absolute;
+        right: 13px;
+        text-shadow: 0 1px #ffffff;
+        text-transform: uppercase;
+    }
+    .toggle input:checked ~ label:after {
+        color: #ffffff;
+        left: 15px;
+        right: auto;
+        text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+    }
 `
 const InputRange = styled.input`
     width: 75%;
@@ -121,21 +166,24 @@ const InputRange = styled.input`
     border-radius: 20px;
     height: 4px;
     background-color: white;
-    --range: calc(var(--max) - var(--min));
-    --ratio: calc((var(--value) - var(--min)) / var(--range));
-    --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+    & {
+        --range: calc(var(--max) - var(--min));
+        --ratio: calc((var(--value) - var(--min)) / var(--range));
+        --sx: calc(0.5 * 2em + var(--ratio) * (100% - 2em));
+    }
 
     &::-webkit-slider-thumb {
         appearance: none;
         border-radius: 20px;
         width: 24px;
         height: 24px;
-        // FIXME - fix slider
         background: url(${img}) no-repeat center white;
         box-shadow: 0px 2px 3px 1px darkgray;
         cursor: ew-resize;
+        margin-top: -10px;
     }
     &::-webkit-slider-runnable-track {
+        height: 4px;
         background: linear-gradient(#1e2a41, #1e2a41) 0 / var(--sx) 100% no-repeat,
             white;
     }
@@ -207,9 +255,9 @@ const Result = styled.div`
     color: #303030;
 `
 const StyledCalc = styled.div`
-    width: 83%;
     height: 344px;
     display: flex;
+    justify-content: center;
     background-color: #f2f2f2;
     padding: 30px;
     border-radius: 4px;
@@ -220,7 +268,6 @@ const Calc = styled.div`
 `
 const CalcBlock = styled.div`
     width: 100%;
-    margin: 50px 100px 40px 100px;
     h1 {
         color: #1e2a41;
         font-size: 30px;

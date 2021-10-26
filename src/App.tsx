@@ -3,9 +3,8 @@ import { MainPage } from './main-page/components/MainPage'
 // import { PasswordForm } from './password-form/components/PasswordForm'
 
 export const App = () => (
-    <StyledApp>
-        <MainPage />
-    </StyledApp>
+        <StyledApp>
+            <MainPage />
+        </StyledApp>
 )
-// FIXME - add material-ui elem
 const StyledApp = styled.div``

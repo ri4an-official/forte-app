@@ -36,9 +36,8 @@ const Points = styled.div`
 `
 const Styled = styled.div`
     margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
     h1 {
+        margin-left: 30px;
         color: #1e2a41;
         font-size: 30px;
     }
