@@ -30,4 +30,11 @@ const StyledMainPage = styled.div`
 const Margin = styled.div`
     margin-left: 100px;
     margin-right: 100px;
+    @media (min-width: 375px) {
+        max-width: 375px;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+    }
 `

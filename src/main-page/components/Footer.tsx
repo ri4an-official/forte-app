@@ -33,10 +33,11 @@ export const Footer = () => (
                 <p>Пресс-Центр</p>
                 <p>Новости</p>
                 <p>Пресс-релизы</p>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href='#'>press@forte.bank</a>
             </div>
             <div>
-                <p>Допольнительно</p>
+                <p>Дополнительно</p>
                 <p>Premier</p>
                 <p>International Relations</p>
                 <p>Реализация имущества </p>
@@ -60,9 +61,9 @@ export const Footer = () => (
                 <TikTok />
             </div>
             <div>
-                <button>
+                <StyledButton>
                     Версия для слобовидящих: <Eye />
-                </button>
+                </StyledButton>
             </div>
         </aside>
     </StyledFooter>
@@ -76,15 +77,48 @@ const StyledFooter = styled.div`
     flex-direction: column;
     aside {
         margin-left: 100px;
+        margin-right: 100px;
         display: flex;
         justify-content: space-between;
-        div > p:hover {
+        div > p:hover:not(:first-child),
+        div > svg:hover {
             color: #9d2550;
+            stroke: #9d2550;
+            fill: #9d2550;
             cursor: pointer;
         }
         div > a {
             text-decoration: none;
             color: #0e2b91;
         }
+        div > * {
+            margin: 10px;
+        }
+        div {
+            & > h4 {
+                font-size: 16px;
+                color: #0e2b91;
+            }
+            & > p {
+                margin-top: 20px;
+                font-size: 14px;
+                color: #303030;
+                &:first-child {
+                    font-weight: 500;
+                    font-size: 16px;
+                }
+            }
+        }
     }
+`
+const StyledButton = styled.button`
+    padding: 5px;
+    width: 312px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #303030;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
 `

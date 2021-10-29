@@ -86,8 +86,8 @@ const StyledInfo = styled.div`
                 width: 240px;
                 height: 170px;
             }
-            // FIXME - cut phone
             .phone {
+                margin-top: -24px;
                 width: 162px;
                 height: 326px;
                 object-fit: cover;
@@ -113,16 +113,16 @@ const StyledInfo = styled.div`
         }
     }
 `
-// FIXME - fix img align, add width full screen
 const Mobile = styled.aside`
     display: flex;
+    justify-content: center;
     * {
         flex-grow: 1;
     }
-    div {
+    & > div {
         padding: 20px;
         margin-top: 100px;
-        width: 100%;
+        width: 140%;
         height: 323px;
         background-color: #f2f2f2;
         flex-direction: column;
@@ -132,7 +132,7 @@ const Mobile = styled.aside`
         ul {
             li {
                 font-size: 16px;
-                margin: 10px;
+                margin-top: 10px;
             }
         }
         p {

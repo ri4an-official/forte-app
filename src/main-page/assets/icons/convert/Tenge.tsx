@@ -1,5 +1,7 @@
-export const Tenge = () => (
+export const Tenge = ({ cn, click }: { cn?: string; click?: () => void }) => (
     <svg
+        className={cn}
+        onClick={click}
         width='24'
         height='24'
         viewBox='0 0 24 24'
