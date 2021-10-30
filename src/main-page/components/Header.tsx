@@ -4,32 +4,51 @@ import { Location } from '../assets/icons/header/Location'
 import { Phone } from '../assets/icons/header/Phone'
 import { Profile } from '../assets/icons/header/Profile'
 import { SelectArrow } from '../assets/icons/header/SelectArrow'
+import { Menu } from '../assets/icons/header/Menu'
 
 export const Header = () => (
     <StyledHeader>
-        <ToRight>
-            <Logo />
-            <span>Рус</span>
-            <SelectArrow />
-        </ToRight>
-        <SideTubs>
-            <Location />
-            Усть-Каменогорск
-        </SideTubs>
-        <div className='active'>Банк</div>
-        <div>Маркет</div>
-        <div>Mobile</div>
-        <div>Путешествия</div>
-        <div>Бизнес</div>
-        <div>Club</div>
-        <ToRight>
-            <Phone />
-            7575
-        </ToRight>
-        <SideTubs>
-            <Profile />
-            Войти
-        </SideTubs>
+        {document.documentElement.clientWidth > 375 ? (
+            <ToRight>
+                <Logo />
+                <span>Рус</span>
+                <SelectArrow />
+            </ToRight>
+        ) : (
+            <Mobile>
+                <div>
+                    <Menu />
+                    <Logo />
+                </div>
+                <div>
+                    <Profile />
+                    Войти
+                </div>
+            </Mobile>
+        )}
+
+        {document.documentElement.clientWidth > 375 && (
+            <>
+                <SideTubs>
+                    <Location />
+                    Усть-Каменогорск
+                </SideTubs>
+                <div className='active'>Банк</div>
+                <div>Маркет</div>
+                <div>Mobile</div>
+                <div>Путешествия</div>
+                <div>Бизнес</div>
+                <div>Club</div>
+                <ToRight>
+                    <Phone />
+                    7575
+                </ToRight>
+                <SideTubs>
+                    <Profile />
+                    Войти
+                </SideTubs>
+            </>
+        )}
     </StyledHeader>
 )
 const StyledHeader = styled.div`
@@ -48,10 +67,34 @@ const StyledHeader = styled.div`
         font-size: 16px;
         font-weight: 500;
         margin: 10px;
+
+        &.active {
+            color: #9d2550;
+            border-bottom: 2px solid #9d2550;
+        }
+        &:hover {
+            cursor: pointer;
+            color: #9d2550;
+        }
+        &:focus {
+            color: #9d2550;
+            border-bottom: 2px solid #9d2550;
+        }
     }
-    div.active {
-        color: #9d2550;
-        border-bottom: 2px solid #9d2550;
+
+    @media (max-width: 375px) {
+        width: 375px;
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+    }
+`
+const Mobile = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    * {
+        margin: 5px;
     }
 `
 const SideTubs = styled.p`

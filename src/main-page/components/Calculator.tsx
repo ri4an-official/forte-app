@@ -20,43 +20,79 @@ export const Calculator = () => {
             <StyledCalc>
                 <Calc>
                     <Block>
-                        <p>Сколько вам нужно?</p>
-                        <Line>
-                            <InputRange
-                                id='range1'
-                                {...sum}
-                                min={10000}
-                                max={10000000}
-                                defaultValue={sum.value}
-                                step={90000}
-                                type='range'
-                            />
-                            <Result>
-                                {Number(sum.value).toLocaleString()} &#8376;
-                            </Result>
-                        </Line>
+                        <span>Сколько вам нужно?</span>
+                        {document.documentElement.clientWidth > 375 ? (
+                            <Line>
+                                <InputRange
+                                    id='range1'
+                                    {...sum}
+                                    min={10000}
+                                    max={10000000}
+                                    defaultValue={sum.value}
+                                    step={90000}
+                                    type='range'
+                                />
+                                <Result>
+                                    {Number(sum.value).toLocaleString()} &#8376;
+                                </Result>
+                            </Line>
+                        ) : (
+                            <>
+                                <Result>
+                                    {Number(sum.value).toLocaleString()} &#8376;
+                                </Result>
+                                <InputRange
+                                    id='range1'
+                                    {...sum}
+                                    min={10000}
+                                    max={10000000}
+                                    defaultValue={sum.value}
+                                    step={90000}
+                                    type='range'
+                                />
+                            </>
+                        )}
                         <Range>
                             <Min>10 000 &#8376;</Min>
                             <Max>10 000 000 &#8376;</Max>
                         </Range>
                     </Block>
                     <Block>
-                        <p>Срок кредитования</p>
-                        <Line>
-                            <InputRange
-                                id='range2'
-                                {...term}
-                                defaultValue={sum.value}
-                                min={6}
-                                max={60}
-                                step={6}
-                                type='range'
-                            />
-                            <Result>
-                                {toTerm(+term.value)}{' '}
-                                {+term.value <= 12 ? 'месяцев' : 'лет'}
-                            </Result>
-                        </Line>
+                        <span>Срок кредитования</span>
+                        {document.documentElement.clientWidth > 375 ? (
+                            <Line>
+                                <InputRange
+                                    id='range2'
+                                    {...term}
+                                    defaultValue={sum.value}
+                                    min={6}
+                                    max={60}
+                                    step={6}
+                                    type='range'
+                                />
+                                <Result>
+                                    {toTerm(+term.value)}{' '}
+                                    {+term.value <= 12 ? 'месяцев' : 'лет'}
+                                </Result>
+                            </Line>
+                        ) : (
+                            <>
+                                <Result>
+                                    {toTerm(+term.value)}{' '}
+                                    {+term.value <= 12 ? 'месяцев' : 'лет'}
+                                </Result>
+                                <InputRange
+                                    id='range2'
+                                    {...term}
+                                    defaultValue={sum.value}
+                                    min={6}
+                                    max={60}
+                                    step={6}
+                                    type='range'
+                                />
+                            </>
+                        )}
+
                         <Range>
                             <Min>6 месяцев</Min>
                             <Max>5 лет</Max>
@@ -74,12 +110,16 @@ export const Calculator = () => {
                         </p>
                     </Clarify>
                 </Calc>
-                <VerticalLine />
+                {document.documentElement.clientWidth > 375 ? <VerticalLine /> : <hr />}
                 <Amount>
-                    <p>Ежемесячный платеж</p>
-                    <Sum>{Number(result.toFixed(0)).toLocaleString()} &#8376;</Sum>
-                    <p>Ставка вознаграждения</p>
-                    <Procent>{procent.toFixed(2)}%</Procent>
+                    <div>
+                        <p>Ежемесячный платеж</p>
+                        <Sum>{Number(result.toFixed(0)).toLocaleString()} &#8376;</Sum>
+                    </div>
+                    <div>
+                        <p>Ставка вознаграждения</p>
+                        <Procent>{procent.toFixed(2)}%</Procent>
+                    </div>
                     <StyledButton>Оформить кредит</StyledButton>
                 </Amount>
             </StyledCalc>
@@ -194,6 +234,9 @@ const Range = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 `
 const Min = styled.div`
     font-size: 12px;
@@ -214,16 +257,17 @@ const StyledButton = styled.button`
     color: white;
     border: none;
     cursor: pointer;
+    text-align: center;
 `
 const Line = styled.span`
     display: flex;
     align-items: center;
 `
-const VerticalLine = styled.div`
+const VerticalLine = styled.hr`
     width: 1px;
     border-left: 1px solid #e0e0e0;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 `
 const Amount = styled.div`
     width: 30%;
@@ -233,6 +277,18 @@ const Amount = styled.div`
     p {
         font-size: 14px;
         color: #303030;
+    }
+    @media (max-width: 375px) {
+        width: 100%;
+        flex-direction: column;
+        * {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
     }
 `
 
@@ -248,23 +304,44 @@ const Sum = styled.div`
     font-size: 30px;
     font-weight: 500;
     color: #9d2550;
+    @media (max-width: 375px) {
+        font-size: 24px;
+    }
 `
 const Result = styled.div`
-    margin-left: 10px;
     font-size: 24px;
     color: #303030;
+    margin-left: 10px;
+    @media (max-width: 375px) {
+        margin-left: 0;
+        text-align: right;
+        font-size: 18px;
+    }
 `
 const StyledCalc = styled.div`
+    width: 100%;
     height: 344px;
     display: flex;
     justify-content: center;
     background-color: #f2f2f2;
-    padding: 30px;
+    padding: 10px;
     border-radius: 4px;
+    @media (max-width: 375px) {
+        padding: 15px;
+        height: 591px;
+        flex-direction: column;
+        input,
+        hr {
+            width: 100%;
+        }
+        hr {
+            border-color: #e0e0e0;
+        }
+    }
 `
 const Calc = styled.div`
-    width: 80%;
-    height: 344px;
+    width: 90%;
+    height: 80%;
 `
 const CalcBlock = styled.div`
     width: 100%;
@@ -273,7 +350,13 @@ const CalcBlock = styled.div`
         font-size: 30px;
     }
     p {
+        margin-top: 10px;
         font-size: 16px;
         color: #303030;
+    }
+    @media (max-width: 375px) {
+        h1 {
+            font-size: 18px;
+        }
     }
 `

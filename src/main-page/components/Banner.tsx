@@ -9,7 +9,7 @@ export const Banner = () => (
     <StyledBanner>
         <WithArrow>
             <StyledArrow>
-                <BackArrow />
+                {document.documentElement.clientWidth > 375 && <BackArrow />}
             </StyledArrow>
             <Block>
                 <Name>
@@ -17,7 +17,10 @@ export const Banner = () => (
                 </Name>
                 <h1>До 3 000 000 &#8376;</h1>
                 <p>Покупки без процентов</p>
-                <StyledButton>Подробнее</StyledButton>
+                <div>
+                    <StyledButton>Подробнее</StyledButton>
+                </div>
+
                 <Pagination>
                     <SelectedItem></SelectedItem>
                     <PaginationItem></PaginationItem>
@@ -27,8 +30,10 @@ export const Banner = () => (
             </Block>
         </WithArrow>
         <WithArrow>
-            <BgImage />
-            <NextArrow />
+            <Mobile>
+                <BgImage />
+            </Mobile>
+            {document.documentElement.clientWidth > 375 && <NextArrow />}
         </WithArrow>
     </StyledBanner>
 )
@@ -63,6 +68,14 @@ const StyledButton = styled.button`
     border: none;
     cursor: pointer;
     text-align: center;
+    @media (max-width: 375px) {
+        margin-top: -30px !important;
+        margin-bottom: -20px;
+        width: 153px;
+        height: 42px;
+        background-color: #9d2550;
+        color: white;
+    }
 `
 const StyledBanner = styled.div`
     display: flex;
@@ -71,6 +84,29 @@ const StyledBanner = styled.div`
     color: white;
     min-width: 1200px;
     height: 400px;
+    @media (max-width: 375px) {
+        min-width: 100%;
+        height: 314px;
+        div {
+            div {
+                h1 {
+                    font-size: 24px;
+                }
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+`
+const Mobile = styled.div`
+    @media (max-width: 375px) {
+        svg {
+            width: 138px;
+            height: 121px;
+            object-fit: cover;
+        }
+    }
 `
 const Name = styled.div`
     font-size: 12px;
@@ -93,5 +129,8 @@ const Block = styled.div`
     }
     p {
         font-size: 18px;
+    }
+    @media (max-width: 375px) {
+        margin-left: -40px;
     }
 `

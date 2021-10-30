@@ -28,18 +28,18 @@ export const Convert = () => {
     const [selectedVal2, setSelectedVal2] = useState<Valute>(TEN)
 
     useAsyncEffect(async () => {
-        fetch(`${BASE_URL}USD_KZT&apiKey=${API_KEY}`)
-            .then((r) => r.json())
-            .then((r) => setUsdCourse(r.results.USD_KZT.val))
-        fetch(BASE_URL + 'EUR_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setEuroCourse(r.results.EUR_KZT.val))
-        fetch(BASE_URL + 'RUB_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setRubCourse(r.results.RUB_KZT.val))
-        fetch(BASE_URL + 'PHP_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setGpbCourse(r.results.PHP_KZT.val))
+        // fetch(`${BASE_URL}USD_KZT&apiKey=${API_KEY}`)
+        //     .then((r) => r.json())
+        //     .then((r) => setUsdCourse(r.results.USD_KZT.val))
+        // fetch(BASE_URL + 'EUR_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setEuroCourse(r.results.EUR_KZT.val))
+        // fetch(BASE_URL + 'RUB_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setRubCourse(r.results.RUB_KZT.val))
+        // fetch(BASE_URL + 'PHP_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setGpbCourse(r.results.PHP_KZT.val))
     }, [])
     const convert = () => {
         switch (selectedVal1) {
@@ -74,7 +74,7 @@ export const Convert = () => {
                         setResult(+inpValue.value / 75)
                         break
                     case 'ten':
-                        setResult(+inpValue.value / 6)
+                        setResult(+inpValue.value * 6)
                         break
                     case 'gbp':
                         setResult(+inpValue.value / 2)
@@ -253,15 +253,27 @@ export const Convert = () => {
     )
 }
 const StyledConvert = styled.div`
+    @media (max-width: 375px) {
+        margin-top: 80px;
+    }
     & > div {
         display: flex;
         justify-content: space-between;
         flex-grow: 1;
         height: 207px;
+        @media (max-width: 375px) {
+            flex-wrap: wrap;
+            * {
+                width: 100%;
+            }
+        }
     }
     h2 {
         font-size: 30px;
         color: #1e2a41;
+        @media (max-width: 375px) {
+            font-size: 24px;
+        }
     }
     & > div > p {
         font-size: 16px;
@@ -296,11 +308,29 @@ const Table = styled.table`
                 margin-top: 8px;
             }
             font-weight: bold;
+            @media (max-width: 375px) {
+                text-align: right;
+            }
+        }
+        td {
+            @media (max-width: 375px) {
+                text-align: center;
+                margin-left: 15px;
+                width: 33%;
+            }
         }
     }
 `
 const ConvertForm = styled.div`
     background-color: #f5f5f5;
+    @media (max-width: 375px) {
+        width: 100%;
+        height: 239px;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 10px;
+    }
+
     div {
         display: flex;
         justify-content: space-between;
@@ -317,33 +347,51 @@ const ConvertForm = styled.div`
     }
     & > * {
         margin-left: 70px;
+        @media (max-width: 375px) {
+            margin-left: 0;
+        }
     }
     h4 {
         margin-top: 20px;
         color: #1e2a41;
         font-size: 24px;
+        @media (max-width: 375px) {
+            font-size: 18px;
+        }
     }
 `
 const Result = styled.div`
     .result {
-        width: 254px;
+        width: 100%;
+    }
+    @media (max-width: 375px) {
+        width: 100%;
     }
 `
 const LineBox = styled.div`
     border-bottom: 1px solid #737373;
+    @media (max-width: 375px) {
+        width: 100%;
+    }
 `
 const StyledCircle = styled.div`
     position: absolute;
-    top: 3250px;
-    right: 550px;
+    top: 3280px;
+    right: 530px;
     z-index: 10;
     cursor: pointer;
+    @media (max-width: 375px) {
+        * {
+            width: 40px;
+            height: 40px;
+        }
+        right: 170px;
+        top: 4730px;
+    }
 `
 const Icons = styled.div`
-    flex-grow: 1;
     * {
         stroke: #737373;
-        margin-left: 10px;
         cursor: pointer;
     }
     *:hover {

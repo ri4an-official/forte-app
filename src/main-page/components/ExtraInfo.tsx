@@ -11,9 +11,17 @@ export const ExtraInfo = () => (
             <p>
                 <Block>
                     <h1>Перевод с карты на любую карту мира</h1>
-                    <LightButton>Подробнее</LightButton>
+                    {document.documentElement.clientWidth > 375 ? (
+                        <LightButton>Подробнее</LightButton>
+                    ) : (
+                        <img className='earth' src={earth} alt='' />
+                    )}
                 </Block>
-                <img className='earth' src={earth} alt='' />
+                {document.documentElement.clientWidth > 375 ? (
+                    <img className='earth' src={earth} alt='' />
+                ) : (
+                    <DarkButton>Подробнее</DarkButton>
+                )}
             </p>
             <p>
                 <Block>
@@ -22,9 +30,17 @@ export const ExtraInfo = () => (
                         Оплата штрафов, коммунальных услуг, услуг сотовых операторов и
                         многое другое
                     </span>
-                    <DarkButton>Произвести платеж</DarkButton>
+                    {document.documentElement.clientWidth <= 375 ? (
+                        <DarkButton>Произвести платеж</DarkButton>
+                    ) : (
+                        <PhoneImg src={phone} alt='' />
+                    )}
                 </Block>
-                <img className='phone' src={phone} alt='' />
+                {document.documentElement.clientWidth > 375 ? (
+                    <DarkButton>Произвести платеж</DarkButton>
+                ) : (
+                    <PhoneImg src={phone} alt='' />
+                )}
             </p>
         </div>
         <p>
@@ -68,38 +84,62 @@ export const ExtraInfo = () => (
                     <GooglePlay />
                 </p>
             </div>
-            <img className='phonefs' src={phonefs} alt='' />
+            <Phonefs src={phonefs} />
         </Mobile>
     </StyledInfo>
 )
 const StyledInfo = styled.div`
     div {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        @media (max-width: 375px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
         & > p {
             height: 278px;
-            width: 44%;
+            width: 45%;
+            @media (max-width: 375px) {
+                width: 100%;
+                height: 457px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                * {
+                    width: 100%;
+                }
+                padding: 10px;
+            }
             padding: 27px;
             background-color: #f2f2f2;
             .earth {
                 margin-top: 60px;
+                @media (max-width: 375px) {
+                    margin-top: 0;
+                }
                 width: 240px;
                 height: 170px;
-            }
-            .phone {
-                margin-top: -24px;
-                width: 162px;
-                height: 326px;
-                object-fit: cover;
             }
         }
     }
     p {
         display: flex;
         justify-content: space-between;
-        height: 350px;
+        @media (max-width: 375px) {
+            flex-direction: column;
+            flex-grow: 1;
+            * {
+                margin-top: 20px;
+            }
+        }
         aside {
             width: 31%;
+            @media (max-width: 375px) {
+                margin-top: 20px;
+                width: 100%;
+            }
             background-color: #f2f2f2;
             h1 {
                 font-size: 18px;
@@ -116,15 +156,31 @@ const StyledInfo = styled.div`
 const Mobile = styled.aside`
     display: flex;
     justify-content: center;
-    * {
-        flex-grow: 1;
+    background-color: #f2f2f2;
+    @media (max-width: 375px) {
+        width: 100%;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        height: 668px;
+        & > div > p {
+            height: 20%;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
     }
     & > div {
+        display: flex;
+        justify-content: space-between;
         padding: 20px;
         margin-top: 100px;
-        width: 140%;
-        height: 323px;
-        background-color: #f2f2f2;
+        width: 100%;
+        @media (max-width: 375px) {
+            margin-top: 5px;
+            width: 100%;
+            height: 50%;
+        }
+        height: 100%;
         flex-direction: column;
         h2 {
             font-size: 24px;
@@ -135,21 +191,41 @@ const Mobile = styled.aside`
                 margin-top: 10px;
             }
         }
-        p {
-            display: flex;
-            justify-content: flex-start;
-        }
     }
-    .phonefs {
-        width: 270px;
-        height: 570px;
+`
+const Phonefs = styled.img`
+    width: 270px;
+    height: 570px;
+    z-index: 10;
+    @media (max-width: 375px) {
+        width: 176px;
+        height: 350px;
     }
+`
+const PhoneImg = styled.img`
+    width: 162px !important;
+    height: 326px !important;
+    @media (max-width: 375px) {
+        width: 142px !important;
+        height: 285px !important;
+        margin-top: 0;
+        margin-top: 10px;
+    }
+    object-fit: cover;
 `
 const Block = styled.div`
     display: flex;
     flex-direction: column;
-    width: 49%;
+    justify-content: center;
+    height: 80%;
+    width: 44%;
+    @media (max-width: 375px) {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
     h1 {
+        margin-top: 0;
         font-size: 24px;
     }
     p {
@@ -173,4 +249,8 @@ const DarkButton = styled.button`
     border: none;
     background-color: #1e2a41;
     color: white;
+    @media (max-width: 375px) {
+        width: 244px !important;
+        height: 44px !important;
+    }
 `

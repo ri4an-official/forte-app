@@ -7,38 +7,41 @@ import { Insurance } from '../assets/icons/tubs/Insurance'
 import { Premiere } from '../assets/icons/tubs/Premiere'
 import { Transfer } from '../assets/icons/tubs/Transfer'
 
-export const Tubs = () => (
-    <StyledTubs>
-        <Tub>
-            <Card />
-            Карты
-        </Tub>
-        <Tub>
-            <Deposite />
-            Депозит
-        </Tub>
-        <Tub>
-            <Transfer />
-            Перевод
-        </Tub>
-        <Tub>
-            <Insurance />
-            Insurance
-        </Tub>
-        <Tub>
-            <Premiere />
-            Premiere
-        </Tub>
-        <Tub>
-            <ForteFamily />
-            Forte Family
-        </Tub>
-        <Tub>
-            <Contsacts />
-            Контакты
-        </Tub>
-    </StyledTubs>
-)
+export const Tubs = () =>
+    document.documentElement.clientWidth > 375 ? (
+        <StyledTubs>
+            <Tub>
+                <Card />
+                Карты
+            </Tub>
+            <Tub>
+                <Deposite />
+                Депозит
+            </Tub>
+            <Tub>
+                <Transfer />
+                Перевод
+            </Tub>
+            <Tub>
+                <Insurance />
+                Insurance
+            </Tub>
+            <Tub>
+                <Premiere />
+                Premiere
+            </Tub>
+            <Tub>
+                <ForteFamily />
+                Forte Family
+            </Tub>
+            <Tub>
+                <Contsacts />
+                Контакты
+            </Tub>
+        </StyledTubs>
+    ) : (
+        <></>
+    )
 const StyledTubs = styled.div`
     display: flex;
     align-items: center;

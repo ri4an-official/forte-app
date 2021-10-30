@@ -26,15 +26,25 @@ const StyledMainPage = styled.div`
     font-family: 'Rubik';
     font-style: normal;
     color: #303030;
+    @media (max-width: 375px) {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 375px;
+        * {
+            max-width: 375px;
+        }
+        overflow-x: hidden;
+    }
+    img {
+        object-fit: cover;
+    }
 `
 const Margin = styled.div`
     margin-left: 100px;
     margin-right: 100px;
-    @media (min-width: 375px) {
-        max-width: 375px;
-        margin-left: 10px;
-        margin-right: 10px;
-        display: flex;
-        flex-direction: column;
+    @media (max-width: 375px) {
+        margin-left: 20px;
+        margin-right: 20px;
     }
 `
