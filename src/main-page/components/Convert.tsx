@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import useAsyncEffect from 'use-async-effect'
 import { useInput } from '../../password-form/hooks/useInput'
 import { Circle } from '../assets/icons/convert/Circle'
 import { Dollar } from '../assets/icons/convert/Dollar'
@@ -16,7 +15,7 @@ const API_KEY = '92e9f85e29ae9d4dd6ce'
 type Valute = 'usd' | 'eur' | 'ten' | 'rub' | 'gbp'
 
 export const Convert = () => {
-    const inpValue = useInput('0')
+    const input = useInput('0')
     const [result, setResult] = useState(0)
 
     const [usdCourse, setUsdCourse] = useState(0)
@@ -27,7 +26,7 @@ export const Convert = () => {
     const [selectedVal1, setSelectedVal1] = useState<Valute>(USD)
     const [selectedVal2, setSelectedVal2] = useState<Valute>(TEN)
 
-    useAsyncEffect(async () => {
+    useEffect(() => {
         // fetch(`${BASE_URL}USD_KZT&apiKey=${API_KEY}`)
         //     .then((r) => r.json())
         //     .then((r) => setUsdCourse(r.results.USD_KZT.val))
@@ -46,99 +45,104 @@ export const Convert = () => {
             case 'usd':
                 switch (selectedVal2) {
                     case 'usd':
-                        setResult(+inpValue.value)
+                        setResult(+input.value)
                         break
                     case 'rub':
-                        setResult(+inpValue.value * 70)
+                        setResult(+input.value * 70)
                         break
                     case 'eur':
-                        setResult(+inpValue.value * 1.5)
+                        setResult(+input.value * 0.7)
                         break
                     case 'ten':
-                        setResult(+inpValue.value * 426)
+                        setResult(+input.value * 426)
                         break
                     case 'gbp':
-                        setResult(+inpValue.value * 15)
+                        setResult(+input.value * 15)
                         break
                 }
                 break
             case 'rub':
                 switch (selectedVal2) {
                     case 'usd':
-                        setResult(+inpValue.value / 70)
+                        setResult(+input.value / 70)
                         break
                     case 'rub':
-                        setResult(+inpValue.value)
+                        setResult(+input.value)
                         break
                     case 'eur':
-                        setResult(+inpValue.value / 75)
+                        setResult(+input.value / 80)
                         break
                     case 'ten':
-                        setResult(+inpValue.value * 6)
+                        setResult(+input.value * 6)
                         break
                     case 'gbp':
-                        setResult(+inpValue.value / 2)
+                        setResult(+input.value / 2)
                         break
                 }
                 break
             case 'eur':
                 switch (selectedVal2) {
                     case 'usd':
-                        setResult(+inpValue.value * 0.8)
+                        setResult(+input.value * 1.6)
                         break
                     case 'rub':
-                        setResult(+inpValue.value * 65)
+                        setResult(+input.value * 65)
                         break
                     case 'eur':
-                        setResult(+inpValue.value)
+                        setResult(+input.value)
                         break
                     case 'ten':
-                        setResult(+inpValue.value * 450)
+                        setResult(+input.value * 450)
                         break
                     case 'gbp':
-                        setResult(+inpValue.value * 13)
+                        setResult(+input.value * 13)
                         break
                 }
                 break
             case 'ten':
                 switch (selectedVal2) {
                     case 'usd':
-                        setResult(+inpValue.value / usdCourse)
+                        setResult(+input.value / usdCourse)
                         break
                     case 'rub':
-                        setResult(+inpValue.value / rubCourse)
+                        setResult(+input.value / rubCourse)
                         break
                     case 'eur':
-                        setResult(+inpValue.value / euroCourse)
+                        setResult(+input.value / euroCourse)
                         break
                     case 'ten':
-                        setResult(+inpValue.value)
+                        setResult(+input.value)
                         break
                     case 'gbp':
-                        setResult(+inpValue.value / gbpCourse)
+                        setResult(+input.value / gbpCourse)
                         break
                 }
                 break
             case 'gbp':
                 switch (selectedVal2) {
                     case 'usd':
-                        setResult(+inpValue.value * 23)
+                        setResult(+input.value * 23)
                         break
                     case 'rub':
-                        setResult(+inpValue.value / 3)
+                        setResult(+input.value / 3)
                         break
                     case 'eur':
-                        setResult(+inpValue.value * 130)
+                        setResult(+input.value * 130)
                         break
                     case 'ten':
-                        setResult(+inpValue.value * 34)
+                        setResult(+input.value * 34)
                         break
                     case 'gbp':
-                        setResult(+inpValue.value)
+                        setResult(+input.value)
                         break
                 }
                 break
         }
+    }
+    const format = (val: string) => {
+        if (!val) return '0'
+        else if (val[0] === '0') return Number(val.replaceAll('0', '')).toLocaleString()
+        return val
     }
     return (
         <StyledConvert>
@@ -185,7 +189,10 @@ export const Convert = () => {
                     <LineBox>
                         <div>
                             <div>
-                                <input {...inpValue} type='number' />
+                                <input
+                                    value={format(input.value)}
+                                    onChange={input.onChange}
+                                />
                             </div>
                             <Icons>
                                 <Dollar
@@ -220,7 +227,7 @@ export const Convert = () => {
                         <div>
                             <Result>
                                 <p className='result'>
-                                    {Number(result.toFixed(2)).toLocaleString()}
+                                    {Number(result.toFixed(2) ?? 0).toLocaleString()}
                                 </p>
                                 <Icons>
                                     <Dollar
@@ -362,10 +369,10 @@ const ConvertForm = styled.div`
 `
 const Result = styled.div`
     .result {
-        width: 100%;
-    }
-    @media (max-width: 375px) {
-        width: 100%;
+        width: 255px;
+        @media (max-width: 375px) {
+            width: 100%;
+        }
     }
 `
 const LineBox = styled.div`
@@ -376,7 +383,7 @@ const LineBox = styled.div`
 `
 const StyledCircle = styled.div`
     position: absolute;
-    top: 3280px;
+    top: 3100px;
     right: 530px;
     z-index: 10;
     cursor: pointer;
@@ -388,9 +395,14 @@ const StyledCircle = styled.div`
         right: 170px;
         top: 4730px;
     }
+    @media (max-width: 320px) {
+        right: 140px;
+        top: 4770px;
+    }
 `
 const Icons = styled.div`
     * {
+        margin-left: 5px;
         stroke: #737373;
         cursor: pointer;
     }

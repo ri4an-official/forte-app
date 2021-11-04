@@ -39,6 +39,9 @@ const StyledMainPage = styled.div`
     img {
         object-fit: cover;
     }
+    a {
+        text-decoration: none;
+    }
 `
 const Margin = styled.div`
     margin-left: 100px;

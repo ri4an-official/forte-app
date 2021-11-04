@@ -89,6 +89,9 @@ const Styled = styled.div`
         margin-left: 30px;
         color: #1e2a41;
         font-size: 30px;
+        @media (max-width: 320px) {
+            margin-left: 0;
+        }
     }
 `
 const StyledCards = styled.div`
@@ -104,6 +107,12 @@ const StyledCards = styled.div`
     * {
         text-align: center;
         margin: 20px;
+        margin-left: 13px;
+        @media (max-width: 320px) {
+            margin: 0;
+            margin-left: -2px;
+            margin-top: 20px;
+        }
     }
     @media (max-width: 375px) {
         flex-direction: column;

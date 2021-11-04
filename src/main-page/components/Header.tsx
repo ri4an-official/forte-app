@@ -16,14 +16,16 @@ export const Header = () => (
             </ToRight>
         ) : (
             <Mobile>
-                <div>
-                    <Menu />
+                <Left>
+                    <span>
+                        <Menu />
+                    </span>
                     <Logo />
-                </div>
-                <div>
+                </Left>
+                <Right>
                     <Profile />
                     Войти
-                </div>
+                </Right>
             </Mobile>
         )}
 
@@ -63,7 +65,6 @@ const StyledHeader = styled.div`
         align-items: center;
         justify-content: center;
         height: 100%;
-        flex-grow: 1;
         font-size: 16px;
         font-weight: 500;
         margin: 10px;
@@ -88,15 +89,27 @@ const StyledHeader = styled.div`
         justify-content: space-between;
         align-content: space-between;
     }
+    @media (max-width: 320px) {
+        width: 320px;
+    }
 `
 const Mobile = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-content: space-between;
-    * {
+    div > * {
+        flex-grow: 1;
         margin: 5px;
     }
 `
+const Left = styled.div`
+    align-self: left;
+`
+const Right = styled.div`
+    margin-left: 170px !important;
+    @media (max-width: 320px) {
+        margin-left: 120px !important;
+    }
+`
+
 const SideTubs = styled.p`
     margin: 10px;
     display: flex;

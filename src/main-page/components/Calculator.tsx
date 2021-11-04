@@ -77,10 +77,10 @@ export const Calculator = () => {
                             </Line>
                         ) : (
                             <>
-                                <Result>
+                                <ResultTime>
                                     {toTerm(+term.value)}{' '}
-                                    {+term.value <= 12 ? 'месяцев' : 'лет'}
-                                </Result>
+                                    {+term.value <= 12 ? 'мес.' : 'лет'}
+                                </ResultTime>
                                 <InputRange
                                     id='range2'
                                     {...term}
@@ -120,12 +120,18 @@ export const Calculator = () => {
                         <p>Ставка вознаграждения</p>
                         <Procent>{procent.toFixed(2)}%</Procent>
                     </div>
-                    <StyledButton>Оформить кредит</StyledButton>
+                    <Center>
+                        <StyledButton>Оформить кредит</StyledButton>
+                    </Center>
                 </Amount>
             </StyledCalc>
         </CalcBlock>
     )
 }
+const Center = styled.div`
+    display: flex !important;
+    justify-content: center !important;
+`
 const Clarify = styled.div`
     * {
         margin: 2px;
@@ -247,7 +253,6 @@ const Max = styled.div`
     color: #737373;
 `
 const StyledButton = styled.button`
-    width: 186px;
     height: 44px;
     text-transform: none;
     font-size: 16px;
@@ -257,7 +262,7 @@ const StyledButton = styled.button`
     color: white;
     border: none;
     cursor: pointer;
-    text-align: center;
+    text-align: center !important;
 `
 const Line = styled.span`
     display: flex;
@@ -277,6 +282,9 @@ const Amount = styled.div`
     p {
         font-size: 14px;
         color: #303030;
+        @media (max-width: 320px) {
+            width: 10%;
+        }
     }
     @media (max-width: 375px) {
         width: 100%;
@@ -290,11 +298,21 @@ const Amount = styled.div`
             margin-right: 5px;
         }
     }
+    @media (max-width: 320px) {
+        * {
+            margin-right: 0;
+        }
+    }
 `
 
 const Block = styled.div`
     width: 95%;
     height: 35%;
+    @media (max-width: 320px) {
+        span {
+            width: 10%;
+        }
+    }
 `
 const Procent = styled.div`
     font-size: 24px;
@@ -313,9 +331,20 @@ const Result = styled.div`
     color: #303030;
     margin-left: 10px;
     @media (max-width: 375px) {
-        margin-left: 0;
-        text-align: right;
+        display: inline-block;
         font-size: 18px;
+        text-align: right;
+        margin-left: 16px;
+    }
+    @media (max-width: 375px) {
+        margin-left: 0px;
+        display: block;
+        text-align: right;
+    }
+`
+const ResultTime = styled(Result)`
+    @media (max-width: 375px) {
+        margin-left: 70px;
     }
 `
 const StyledCalc = styled.div`
@@ -324,9 +353,10 @@ const StyledCalc = styled.div`
     display: flex;
     justify-content: center;
     background-color: #f2f2f2;
-    padding: 10px;
+    padding: 20px;
     border-radius: 4px;
     @media (max-width: 375px) {
+        width: 90%;
         padding: 15px;
         height: 591px;
         flex-direction: column;
@@ -335,12 +365,15 @@ const StyledCalc = styled.div`
             width: 100%;
         }
         hr {
-            border-color: #e0e0e0;
+            color: #e0e0e0;
         }
     }
 `
 const Calc = styled.div`
     width: 90%;
+    @media (max-width: 375px) {
+        width: 100%;
+    }
     height: 80%;
 `
 const CalcBlock = styled.div`

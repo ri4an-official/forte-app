@@ -28,7 +28,7 @@ export const useInput = (initValue = '') => {
     return {
         value,
         onChange: (e: any) => {
-            setValue(e.target.value)
+            setValue(e.currentTarget.value)
             setFirstInp(true)
         },
         error,

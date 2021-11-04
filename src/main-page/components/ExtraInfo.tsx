@@ -14,11 +14,11 @@ export const ExtraInfo = () => (
                     {document.documentElement.clientWidth > 375 ? (
                         <LightButton>Подробнее</LightButton>
                     ) : (
-                        <img className='earth' src={earth} alt='' />
+                        <EarthImg src={earth} alt='' />
                     )}
                 </Block>
                 {document.documentElement.clientWidth > 375 ? (
-                    <img className='earth' src={earth} alt='' />
+                    <EarthImg src={earth} alt='' />
                 ) : (
                     <DarkButton>Подробнее</DarkButton>
                 )}
@@ -30,16 +30,16 @@ export const ExtraInfo = () => (
                         Оплата штрафов, коммунальных услуг, услуг сотовых операторов и
                         многое другое
                     </span>
-                    {document.documentElement.clientWidth <= 375 ? (
+                    {document.documentElement.clientWidth > 375 ? (
                         <DarkButton>Произвести платеж</DarkButton>
                     ) : (
                         <PhoneImg src={phone} alt='' />
                     )}
                 </Block>
                 {document.documentElement.clientWidth > 375 ? (
-                    <DarkButton>Произвести платеж</DarkButton>
-                ) : (
                     <PhoneImg src={phone} alt='' />
+                ) : (
+                    <DarkButton>Произвести платеж</DarkButton>
                 )}
             </p>
         </div>
@@ -64,7 +64,7 @@ export const ExtraInfo = () => (
             </aside>
             <aside>
                 <Question />
-                <h1>Где посмотреть выписку по карте?</h1>
+                <h1>Что такое CVC2/CVV2?</h1>
                 <p>
                     CVC2/CVV2 — это трехзначный код, указанный на оборотной стороне
                     карты, на панели для подписи.
@@ -101,7 +101,7 @@ const StyledInfo = styled.div`
             height: 278px;
             width: 45%;
             @media (max-width: 375px) {
-                width: 100%;
+                width: 94%;
                 height: 457px;
                 display: flex;
                 justify-content: center;
@@ -114,14 +114,6 @@ const StyledInfo = styled.div`
             }
             padding: 27px;
             background-color: #f2f2f2;
-            .earth {
-                margin-top: 60px;
-                @media (max-width: 375px) {
-                    margin-top: 0;
-                }
-                width: 240px;
-                height: 170px;
-            }
         }
     }
     p {
@@ -156,7 +148,13 @@ const StyledInfo = styled.div`
 const Mobile = styled.aside`
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #f2f2f2;
+    height: 368px;
+    margin-top: 150px;
+    & > div > p {
+        height: 100px;
+    }
     @media (max-width: 375px) {
         width: 100%;
         margin-top: 10px;
@@ -173,7 +171,6 @@ const Mobile = styled.aside`
         display: flex;
         justify-content: space-between;
         padding: 20px;
-        margin-top: 100px;
         width: 100%;
         @media (max-width: 375px) {
             margin-top: 5px;
@@ -197,9 +194,11 @@ const Phonefs = styled.img`
     width: 270px;
     height: 570px;
     z-index: 10;
+    margin-bottom: 50px;
     @media (max-width: 375px) {
         width: 176px;
         height: 350px;
+        margin-bottom: 0;
     }
 `
 const PhoneImg = styled.img`
@@ -212,6 +211,18 @@ const PhoneImg = styled.img`
         margin-top: 10px;
     }
     object-fit: cover;
+    @media (max-width: 320px) {
+        width: 122px !important;
+        height: 255px !important;
+    }
+`
+const EarthImg = styled.img`
+    margin-top: 60px;
+    @media (max-width: 375px) {
+        margin-top: 0;
+    }
+    width: 240px;
+    height: 170px;
 `
 const Block = styled.div`
     display: flex;
