@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Card } from '../assets/icons/tubs/Card'
 import { Contsacts } from '../assets/icons/tubs/Contacts'
+import { CreditIcon } from '../assets/icons/tubs/Credit'
 import { Deposite } from '../assets/icons/tubs/Deposite'
 import { ForteFamily } from '../assets/icons/tubs/ForteFamily'
 import { Insurance } from '../assets/icons/tubs/Insurance'
@@ -10,6 +11,10 @@ import { Transfer } from '../assets/icons/tubs/Transfer'
 export const Tubs = () =>
     document.documentElement.clientWidth > 375 ? (
         <StyledTubs>
+            <Tub>
+                <CreditIcon />
+                Кредиты
+            </Tub>
             <Tub>
                 <Card />
                 Карты
@@ -55,4 +60,9 @@ const Tub = styled.div`
     justify-content: center;
     align-items: center;
     flex-grow: 0.08;
+    &.active,
+    &:hover {
+        color: #9d2550;
+        stroke: #9d2550;
+    }
 `
