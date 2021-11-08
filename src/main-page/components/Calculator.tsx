@@ -132,7 +132,7 @@ const Center = styled.div`
     display: flex !important;
     justify-content: center !important;
 `
-const Clarify = styled.div`
+export const Clarify = styled.div`
     * {
         margin: 2px;
     }
@@ -204,7 +204,7 @@ const Clarify = styled.div`
         text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
     }
 `
-const InputRange = styled.input`
+export const InputRange = styled.input`
     width: 75%;
     appearance: none;
     outline: none;
@@ -234,7 +234,7 @@ const InputRange = styled.input`
             white;
     }
 `
-const Range = styled.div`
+export const Range = styled.div`
     width: 75%;
     height: 30px;
     display: flex;
@@ -244,15 +244,15 @@ const Range = styled.div`
         width: 100%;
     }
 `
-const Min = styled.div`
+export const Min = styled.div`
     font-size: 12px;
     color: #737373;
 `
-const Max = styled.div`
+export const Max = styled.div`
     font-size: 12px;
     color: #737373;
 `
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     height: 44px;
     text-transform: none;
     font-size: 16px;

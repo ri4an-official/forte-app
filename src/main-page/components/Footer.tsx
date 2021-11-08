@@ -145,7 +145,7 @@ export const Footer = () => {
                     <TikTok />
                 </div>
                 <StyledButton>
-                    Версия для слобовидящих: <Eye />
+                    Версия для слабовидящих: <Eye />
                 </StyledButton>
             </aside>
         </StyledFooter>

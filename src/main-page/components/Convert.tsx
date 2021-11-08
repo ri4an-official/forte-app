@@ -27,18 +27,18 @@ export const Convert = () => {
     const [selectedVal2, setSelectedVal2] = useState<Valute>(TEN)
 
     useEffect(() => {
-        fetch(`${BASE_URL}USD_KZT&apiKey=${API_KEY}`)
-            .then((r) => r.json())
-            .then((r) => setUsdCourse(r.results.USD_KZT.val))
-        fetch(BASE_URL + 'EUR_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setEuroCourse(r.results.EUR_KZT.val))
-        fetch(BASE_URL + 'RUB_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setRubCourse(r.results.RUB_KZT.val))
-        fetch(BASE_URL + 'PHP_KZT&apiKey=' + API_KEY)
-            .then((r) => r.json())
-            .then((r) => setGpbCourse(r.results.PHP_KZT.val))
+        // fetch(`${BASE_URL}USD_KZT&apiKey=${API_KEY}`)
+        //     .then((r) => r.json())
+        //     .then((r) => setUsdCourse(r.results.USD_KZT.val))
+        // fetch(BASE_URL + 'EUR_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setEuroCourse(r.results.EUR_KZT.val))
+        // fetch(BASE_URL + 'RUB_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setRubCourse(r.results.RUB_KZT.val))
+        // fetch(BASE_URL + 'PHP_KZT&apiKey=' + API_KEY)
+        //     .then((r) => r.json())
+        //     .then((r) => setGpbCourse(r.results.PHP_KZT.val))
     }, [])
     const convert = () => {
         switch (selectedVal1) {
@@ -346,11 +346,6 @@ const ConvertForm = styled.div`
     input {
         line-height: 28.8px;
         margin-bottom: 10px;
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
     }
     & > * {
         margin-left: 70px;
@@ -383,7 +378,7 @@ const LineBox = styled.div`
 `
 const StyledCircle = styled.div`
     position: absolute;
-    top: 3100px;
+    top: 3130px;
     right: 530px;
     z-index: 10;
     cursor: pointer;

@@ -61,7 +61,7 @@ const Pagination = styled.div`
         margin-bottom: 5px;
     }
 `
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     width: 153px;
     height: 42px;
     font-size: 16px;
@@ -82,7 +82,7 @@ const StyledButton = styled.button`
         color: white;
     }
 `
-const StyledBanner = styled.div`
+export const StyledBanner = styled.div`
     display: flex;
     align-items: center;
     background-image: url(${img});
@@ -123,13 +123,13 @@ const Mobile = styled.div`
         }
     }
 `
-const Name = styled.div`
+export const Name = styled.div`
     font-size: 12px;
     span {
         text-decoration: underline;
     }
 `
-const Block = styled.div`
+export const Block = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;

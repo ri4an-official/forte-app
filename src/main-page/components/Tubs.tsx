@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { Card } from '../assets/icons/tubs/Card'
 import { Contsacts } from '../assets/icons/tubs/Contacts'
@@ -12,8 +13,10 @@ export const Tubs = () =>
     document.documentElement.clientWidth > 375 ? (
         <StyledTubs>
             <Tub>
-                <CreditIcon />
-                Кредиты
+                <Link to='/credit'>
+                    <CreditIcon />
+                    Кредиты
+                </Link>
             </Tub>
             <Tub>
                 <Card />
@@ -59,10 +62,17 @@ const Tub = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    * {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     flex-grow: 0.08;
     &.active,
-    &:hover {
+    &:hover,
+    &:focus {
         color: #9d2550;
-        stroke: #9d2550;
+        cursor: pointer;
     }
 `

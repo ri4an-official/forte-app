@@ -5,12 +5,16 @@ import { Phone } from '../assets/icons/header/Phone'
 import { Profile } from '../assets/icons/header/Profile'
 import { SelectArrow } from '../assets/icons/header/SelectArrow'
 import { Menu } from '../assets/icons/header/Menu'
+import { Link } from 'react-router-dom'
 
 export const Header = () => (
     <StyledHeader>
         {document.documentElement.clientWidth > 375 ? (
             <ToRight>
-                <Logo />
+                <Link to='/'>
+                    <Logo />
+                </Link>
+
                 <span>Рус</span>
                 <SelectArrow />
             </ToRight>

@@ -1,15 +1,18 @@
-import { Calculator } from '../../main-page/components/Calculator'
+import { Margin } from '../../main-page/components/MainPage'
 import { Advantages } from './Advantages'
 import { Banner } from './Banner'
+import { Calculator } from './Calculator'
 import { GetCredit } from './GetCredit'
 import { Questions } from './Questions'
 
 export const CreditPage = () => (
     <>
         <Banner />
-        <Advantages />
-        <Calculator />
-        <GetCredit />
-        <Questions />
+        <Margin>
+            <Advantages />
+            <Calculator />
+            <GetCredit />
+            <Questions />
+        </Margin>
     </>
 )
