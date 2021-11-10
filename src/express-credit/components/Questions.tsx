@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Plus } from '../assets/svg/getcredit/Plus'
+import { Plus } from '../assets/svg/calculator/Minus'
 
 export const Questions = () => {
     const lorem = `Lorem ipsum dolor, sit amet consectetur adipisicing elit.
