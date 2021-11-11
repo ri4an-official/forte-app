@@ -14,6 +14,11 @@ const BASE_URL = 'https://free.currconv.com/api/v7/convert?q='
 const API_KEY = '92e9f85e29ae9d4dd6ce'
 type Valute = 'usd' | 'eur' | 'ten' | 'rub' | 'gbp'
 
+export const format = (val: string) => {
+    if (!val) return '0'
+    else if (val[0] === '0') return Number(val.replaceAll('0', '')).toLocaleString()
+    return val
+}
 export const Convert = () => {
     const input = useInput('0')
     const [result, setResult] = useState(0)
@@ -139,11 +144,7 @@ export const Convert = () => {
                 break
         }
     }
-    const format = (val: string) => {
-        if (!val) return '0'
-        else if (val[0] === '0') return Number(val.replaceAll('0', '')).toLocaleString()
-        return val
-    }
+
     return (
         <StyledConvert>
             <h2>Курсы безналичной конвертации валют</h2>

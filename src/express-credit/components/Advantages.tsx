@@ -15,7 +15,7 @@ export const Advantages = () => {
                 <div>
                     <Title>Кредит без залога</Title>
                 </div>
-                <div>
+                <Items>
                     <Item>
                         <CreditIcon />
                         <p>До 7 000 000 ₸</p>
@@ -28,7 +28,7 @@ export const Advantages = () => {
                         <Procent />
                         <p>От 7% годовых</p>
                     </Item>
-                </div>
+                </Items>
                 <div>
                     <text>
                         Рассчитаем займ с минимальной ставкой в тот же день и сразу
@@ -139,6 +139,17 @@ const StyledArrow = styled.div`
         }
     }
 `
+const Items = styled.div`
+    @media (max-width: 320px) {
+        display: flex;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+`
+const Item = styled.div`
+    display: flex;
+    flex-direction: row;
+`
 const SecondBlock = styled.div`
     display: flex;
     flex-direction: column;
@@ -181,8 +192,4 @@ const Title = styled.div`
     font-size: 24px;
     font-weight: 500;
     color: #1e2a41;
-`
-const Item = styled.div`
-    display: flex;
-    flex-direction: row;
 `

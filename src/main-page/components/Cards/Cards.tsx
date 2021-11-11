@@ -66,7 +66,7 @@ export const Cards = () => {
         </Styled>
     )
 }
-const Points = styled.div`
+export const Points = styled.div`
     display: flex;
     justify-content: center;
     * {
@@ -82,7 +82,7 @@ const Points = styled.div`
         }
     }
 `
-const StyledPoint = styled.div``
+export const StyledPoint = styled.div``
 const Styled = styled.div`
     margin-top: 50px;
     h1 {

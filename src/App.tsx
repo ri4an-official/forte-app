@@ -1,11 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
 import { CreditPage } from './express-credit/components/CreditPage'
+import { Request } from './express-credit/components/Request'
 import { Footer } from './main-page/components/Footer'
 import { Header } from './main-page/components/Header'
 import { MainPage } from './main-page/components/MainPage'
 import { Tubs } from './main-page/components/Tubs'
-// import { PasswordForm } from './password-form/components/PasswordForm'
+import { PasswordForm } from './password-form/components/PasswordForm'
 
 export const App = () => (
     <StyledApp>
@@ -13,6 +14,8 @@ export const App = () => (
         <Tubs />
         <main>
             <Routes>
+                <Route path='/request' element={<Request />} />
+                <Route path='/login' element={<PasswordForm />} />
                 <Route path='/credit' element={<CreditPage />} />
                 <Route path='/' element={<MainPage />} />
             </Routes>

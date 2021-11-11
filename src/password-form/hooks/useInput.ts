@@ -6,24 +6,23 @@ export const useInput = (initValue = '') => {
     const [firstInp, setFirstInp] = useState(false)
     useEffect(() => {
         if (
-            value &&
-            (value.includes('#') ||
-                value.includes('№') ||
-                value.includes('$') ||
-                value.includes('%') ||
-                value.includes(':') ||
-                value.includes('?') ||
-                value.includes('*') ||
-                value.includes('(') ||
-                value.includes(')')) &&
-            !value.includes('qwerty') &&
-            !value.includes('123456') &&
-            /d/.test(value) &&
-            /[A-Z]/.test(value)
+            value
+            // && (value.includes('#') ||
+            //     value.includes('№') ||
+            //     value.includes('$') ||
+            //     value.includes('%') ||
+            //     value.includes(':') ||
+            //     value.includes('?') ||
+            //     value.includes('*') ||
+            //     value.includes('(') ||
+            //     value.includes(')')) &&
+            // !value.includes('qwerty') &&
+            // !value.includes('123456') &&
+            // /d/.test(value) &&
+            // /[A-Z]/.test(value)
         )
             setError('')
-        else if (firstInp && value.split('').some((s) => s !== s.toUpperCase()))
-            setError('Пароль не соответствует требованиям безопасности')
+        else if (firstInp) setError('Пароль не соответствует требованиям безопасности')
     }, [firstInp, value])
     return {
         value,

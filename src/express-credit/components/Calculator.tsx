@@ -1,42 +1,81 @@
 import { Checkbox, Modal } from '@material-ui/core'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { StyledButton } from '../../main-page/components/Banner'
 import { InputRange, Max, Min, Range } from '../../main-page/components/Calculator'
+import { format } from '../../main-page/components/Convert'
 import { useInput } from '../../password-form/hooks/useInput'
 import { Eye } from '../assets/svg/calculator/Eye'
 
 export const Calculator = () => {
-    const input = useInput('3000000')
     const [sum, setSum] = useState(0)
     const [term, setTerm] = useState(6)
     const [checked, setChecked] = useState(false)
     const [iin, showIin] = useState(false)
     const [show, showModal] = useState(false)
     const [procent, setProcent] = useState(16.99)
+
     const setterm = (term: number) => () => setTerm(term)
     const close = () => showModal(false)
     const open = () => showModal(true)
+
+    const [inpVal, setInpVal] = useState(300000)
+    const inpNum = useInput()
+    const inpSalary = useInput()
+    const inpIin = useInput()
+
+    const [error, setError] = useState('')
+    const redirect = () => {
+        if (!error && inpNum.value && inpSalary.value && inpIin.value) to('/request')
+    }
+    const to = useNavigate()
+
+    const step = 300000
+    const plus = () => setInpVal((v) => v + step)
+    const minus = () => setInpVal((v) => (v - step > 0 ? v - step : 0))
+
     useEffect(() => {
-        setSum(+input.value / term / (1 + procent / 100))
-    }, [input.value, term, procent])
+        setSum(inpVal / term / (1 + procent / 100))
+    }, [inpVal, term, procent])
+    useEffect(() => {
+        if (inpVal < 100000) setError('Минимальная сумма 100 000 ₸')
+        else if (inpVal > 7000000) setError('Максимальная сумма 7 000 000 ₸')
+        else setError('')
+    }, [inpVal])
     return (
         <Block>
             <Title>Рассчитать Экспресс-кредит</Title>
             <StyledCalculator>
                 <InputBlock>
-                    <ShowSum>
+                    <ShowSum error={!!error}>
                         <div>Сумма кредита</div>
-                        <p>{Number(input.value).toLocaleString()} &#8376;</p>
+                        <p>
+                            {document.documentElement.clientWidth <= 380 && (
+                                <SumBtn onClick={minus}>-</SumBtn>
+                            )}
+                            <input
+                                type='number'
+                                value={format(inpVal.toString())}
+                                onChange={(e) => setInpVal(+e.target.value)}
+                            />
+                            {document.documentElement.clientWidth <= 380 && (
+                                <SumBtn onClick={plus}>+</SumBtn>
+                            )}
+                        </p>
+                        {error && <Error>{error}</Error>}
                     </ShowSum>
+                    {document.documentElement.clientWidth > 380 && (
+                        <InputRange
+                            value={inpVal}
+                            onChange={(e) => setInpVal(+e.target.value)}
+                            type='range'
+                            min='100000'
+                            max='7000000'
+                            step='300000'
+                        />
+                    )}
 
-                    <InputRange
-                        {...input}
-                        type='range'
-                        min='100000'
-                        max='7000000'
-                        step='300000'
-                    />
                     <Range>
                         <Min>100 000 &#8376;</Min>
                         <Max>7 000 000 &#8376;</Max>
@@ -115,13 +154,21 @@ export const Calculator = () => {
                 </ResultBlock>
                 <InputsBlock>
                     <span>
-                        <input placeholder='ИИН' type={iin ? 'number' : 'password'} />
+                        <Input
+                            {...inpIin}
+                            placeholder='ИИН *'
+                            type={iin ? 'number' : 'password'}
+                        />
                         <EyeButton onClick={() => showIin(!iin)}>
                             <Eye />
                         </EyeButton>
                     </span>
-                    <input placeholder='Номер телефона' type='number' />
-                    <input placeholder='Основной ежемесяч. доход, ₸' type='number' />
+                    <Input {...inpNum} placeholder='Номер телефона *' type='number' />
+                    <Input
+                        {...inpSalary}
+                        placeholder='Основной ежемесяч. доход, ₸ *'
+                        type='number'
+                    />
                 </InputsBlock>
                 <Outer>
                     <p>
@@ -140,24 +187,7 @@ export const Calculator = () => {
                                     dicta at, delectus odit. Distinctio autem minima
                                     omnis voluptatibus dicta numquam nesciunt atque
                                     eveniet saepe alias?Lorem ipsum dolor sit amet
-                                    consectetur adipisicing elit. Dolorem eum eveniet
-                                    fugiat deserunt voluptates dicta at, delectus odit.
-                                    Distinctio autem minima omnis voluptatibus dicta
-                                    numquam nesciunt atque eveniet saepe alias?Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit.
-                                    Dolorem eum eveniet fugiat deserunt voluptates dicta
-                                    at, delectus odit. Distinctio autem minima omnis
-                                    voluptatibus dicta numquam nesciunt atque eveniet
-                                    saepe alias?Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Dolorem eum eveniet fugiat
-                                    deserunt voluptates dicta at, delectus odit.
-                                    Distinctio autem minima omnis voluptatibus dicta
-                                    numquam nesciunt atque eveniet saepe alias?Lorem
-                                    ipsum dolor sit amet consectetur adipisicing elit.
-                                    Dolorem eum eveniet fugiat deserunt voluptates dicta
-                                    at, delectus odit. Distinctio autem minima omnis
-                                    voluptatibus dicta numquam nesciunt atque eveniet
-                                    saepe alias?
+                                    consectetur
                                 </p>
                                 <Center>
                                     <CreditButton onClick={close}>Принять</CreditButton>
@@ -166,7 +196,9 @@ export const Calculator = () => {
                         </StyledModal>
                     </Modal>
                     <div>Для точного расчета необходимо оставить заявку</div>
-                    <CreditButton>Оформить кредит</CreditButton>
+                    <CreditButton disabled={!!error} onClick={redirect}>
+                        Оформить кредит
+                    </CreditButton>
                 </Outer>
             </StyledCalculator>
         </Block>
@@ -199,7 +231,31 @@ const StyledModal = styled.div`
             font-weight: 900;
             cursor: pointer;
         }
+        @media (max-width: 320px) {
+            width: 90%;
+            overflow-y: visible;
+        }
     }
+`
+const Input = styled.input<{ error?: string }>`
+    border-color: ${({ error }) => (!!error ? 'red' : 'darkgray')} !important;
+`
+const Error = styled.div`
+    color: red;
+    font-size: 12px !important;
+`
+const SumBtn = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17%;
+    height: 45px;
+    font-size: 44px;
+    background-color: #9d2550;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 100;
 `
 const Center = styled.div`
     display: flex;
@@ -208,12 +264,20 @@ const Center = styled.div`
 `
 const Outer = styled.div`
     width: 100%;
+    height: auto;
     * {
         margin-top: 20px;
+        @media (max-width: 320px) {
+            margin-top: 25px;
+        }
     }
     p,
     div {
         font-size: 14px;
+        @media (max-width: 320px) {
+            margin-top: 5px;
+            margin-bottom: 40px;
+        }
     }
     p {
         word-spacing: 5px;
@@ -235,6 +299,12 @@ const CreditButton = styled(StyledButton)`
     justify-content: center;
     background-color: #9d2550;
     color: white;
+    @media (max-width: 320px) {
+        margin-top: 20px !important;
+    }
+    &:disabled {
+        background-color: darkgray;
+    }
 `
 const InputsBlock = styled.div`
     display: flex;
@@ -256,23 +326,25 @@ const InputsBlock = styled.div`
         font-size: 16px;
         &:first-child {
             width: 100% !important;
+            @media (max-width: 320px) {
+                width: 150px;
+            }
+        }
+        @media (max-width: 320px) {
+            width: 100% !important;
         }
     }
     span {
         width: 93% !important;
         position: relative;
-        /* &::after {
-            content: ' *';
-            color: red;
-            position: absolute;
-            top: -3px;
-            left: 5px;
-        } */
+        @media (max-width: 320px) {
+            width: 85% !important;
+        }
     }
 `
 const EyeButton = styled.div`
     position: absolute;
-    left: 600px;
+    left: 240px;
     top: 35px;
     cursor: pointer;
 `
@@ -287,6 +359,13 @@ const ResultBlock = styled.div`
     & > * {
         width: 45%;
     }
+    @media (max-width: 320px) {
+        flex-direction: column;
+        text-align: center;
+        & > * {
+            width: 95%;
+        }
+    }
 `
 const Result = styled.div`
     div {
@@ -299,7 +378,7 @@ const Result = styled.div`
     }
 `
 const Sum = styled.div`
-    font-size: 24px;
+    font-size: 20px;
     color: #1e2a41;
 `
 const TermBlock = styled.div`
@@ -315,10 +394,18 @@ const TermBlock = styled.div`
     p {
         display: flex;
         justify-content: space-between;
+        @media (max-width: 320px) {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            * {
+                margin-top: 5px;
+                margin-right: 5px;
+            }
+        }
     }
 `
 const TermButton = styled.button`
-    width: 70px;
+    width: 65px;
     height: 36px;
     background-color: #9d255066;
     color: white;
@@ -330,7 +417,7 @@ const TermButton = styled.button`
         background-color: #9d2550;
     }
 `
-const ShowSum = styled.div`
+const ShowSum = styled.div<{ error?: boolean }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -338,7 +425,7 @@ const ShowSum = styled.div`
         font-size: 16px;
         align-self: right;
     }
-    p {
+    input {
         padding: 10px;
         display: flex;
         justify-content: flex-end;
@@ -348,6 +435,23 @@ const ShowSum = styled.div`
         font-size: 24px;
         border-radius: 4px;
         background-color: white;
+        border: 1px solid ${({ error }) => (error ? 'red' : 'darkgray')};
+    }
+    @media (max-width: 320px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        input {
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 18px;
+            height: 25px;
+            justify-content: center;
+        }
+        & > p {
+            display: flex;
+            width: 100%;
+            flex-direction: row !important;
+        }
     }
 `
 const InputBlock = styled.div`
@@ -356,6 +460,11 @@ const InputBlock = styled.div`
     input,
     & > div {
         width: 100% !important;
+    }
+    input {
+        @media (max-width: 320px) {
+            width: 150px !important;
+        }
     }
 `
 const Block = styled.div`
@@ -378,4 +487,9 @@ const StyledCalculator = styled.div`
     width: 60%;
     height: auto;
     background-color: #f2f2f2;
+    @media (max-width: 320px) {
+        padding: 10px;
+        height: 1100px;
+        width: 100%;
+    }
 `

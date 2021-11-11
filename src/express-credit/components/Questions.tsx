@@ -79,6 +79,9 @@ const Outer = styled.aside`
     margin-bottom: 20px;
     font-size: 12px;
     color: #999999;
+    @media (max-width: 320px) {
+        margin-bottom: -250px;
+    }
     span {
         color: #0e2b91;
         text-decoration: underline;
@@ -117,6 +120,7 @@ const Item = styled.div<{ active?: boolean }>`
     cursor: pointer;
     p {
         font-size: 16px;
+        width: 90%;
     }
     svg {
         transform: rotate(0deg);
