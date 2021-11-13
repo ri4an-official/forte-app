@@ -27,7 +27,8 @@ export const Calculator = () => {
 
     const [error, setError] = useState('')
     const redirect = () => {
-        if (!error && inpNum.value && inpSalary.value && inpIin.value) to('/request')
+        if (!error && !inpNum.error && !inpSalary.error && !inpIin.error) to('/request')
+        console.log(error || inpIin.error || inpNum.error || inpSalary.error)
     }
     const to = useNavigate()
 
@@ -196,7 +197,15 @@ export const Calculator = () => {
                         </StyledModal>
                     </Modal>
                     <div>Для точного расчета необходимо оставить заявку</div>
-                    <CreditButton disabled={!!error} onClick={redirect}>
+                    <CreditButton
+                        disabled={
+                            !!error ||
+                            !inpIin.value ||
+                            !inpNum.value ||
+                            !inpSalary.value
+                        }
+                        onClick={redirect}
+                    >
                         Оформить кредит
                     </CreditButton>
                 </Outer>
@@ -239,6 +248,7 @@ const StyledModal = styled.div`
 `
 const Input = styled.input<{ error?: string }>`
     border-color: ${({ error }) => (!!error ? 'red' : 'darkgray')} !important;
+    outline: none;
 `
 const Error = styled.div`
     color: red;
