@@ -1,2 +1,26 @@
-# Soon...
-    
+# Forte Bank Application
+
+![''](./assets/images/screen1.png)
+![''](./assets/images/screen2.png)
+![''](./assets/images/screen3.png)
+![''](./assets/images/screen4.png)
+![''](./assets/images/screen5.png)
+![''](./assets/images/screen6.png)
+![''](./assets/images/screen7.png)
+![''](./assets/images/screen8.png)
+![''](./assets/images/screen9.png)
+![''](./assets/images/screen10.png)
+![''](./assets/images/screen11.png)
+![''](./assets/images/screen12.png)
+![''](./assets/images/screen13.png)
+![''](./assets/images/screen14.png)
+![''](./assets/images/screen15.png)
+![''](./assets/images/screen16.png)
+![''](./assets/images/screen17.png)
+![''](./assets/images/screen18.png)
+![''](./assets/images/screen19.png)
+![''](./assets/images/screen20.png)
+![''](./assets/images/screen21.png)
+![''](./assets/images/screen22.png)
+![''](./assets/images/screen23.png)
+![''](./assets/images/screen24.png)

@@ -354,7 +354,10 @@ const InputsBlock = styled.div`
 `
 const EyeButton = styled.div`
     position: absolute;
-    left: 240px;
+    left: 600px;
+    @media (max-width: 320px) {
+        left: 240px;
+    }
     top: 35px;
     cursor: pointer;
 `
